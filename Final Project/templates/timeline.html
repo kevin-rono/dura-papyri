@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Papyri Finder</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='timeline.css') }}">
+</head>
+
+<body>
+    <h3>Timeline</h3>
+
+    <div class="timeline">
+        <div class="container left">
+          <div class="content">
+            <h2>300 BCE</h2>
+            <p>Content here...</p>
+          </div>
+        </div>
+        <div class="container right">
+          <div class="content">
+            <h2>250 CE</h2>
+            <p>More content...</p>
+          </div>
+        </div>
+      </div>
+
+    <button id="timelineReturn" type="button" onclick="history.back()">Return to Home</button>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="../static/papyri.js"></script>
+
+</html>
