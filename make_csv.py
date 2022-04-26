@@ -1,7 +1,9 @@
+import base64
 import json
 import os
 
 import pandas as pd
+import requests
 
 
 def get_subject(xml):
@@ -42,6 +44,11 @@ def get_date(xml):
     return date
 
 
+def clean_date(raw_date):
+    # TODO
+    return raw_date
+
+
 def get_content(xml):
     return xml["TEI"]["teiHeader"]["fileDesc"]["titleStmt"]["title"]
 
@@ -54,6 +61,10 @@ def get_image_url(xml):
                 return d["p"]["figure"]["graphic"]["@url"]
             except:
                 return d["p"]["figure"][0]["graphic"]["@url"]
+
+
+def get_image(image_url):
+    return base64.b64encode(requests.get(image_url).content)
 
 
 def get_material(xml):
@@ -77,8 +88,9 @@ def main():
         data["content"] = get_content(xml)
         data["name"] = get_name(xml)
         data["subject"] = get_subject(xml)
-        data["date"] = get_date(xml)
+        data["date"] = clean_date(get_date(xml))
         data["image_url"] = get_image_url(xml)
+        data["image"] = get_image(data["image_url"])
         data["material"] = get_material(xml)
         data["origin"] = get_origin(xml)
         fields.append(data)
