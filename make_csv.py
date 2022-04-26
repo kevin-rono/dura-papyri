@@ -5,14 +5,17 @@ import pandas as pd
 
 def get_subject(xml):
     subject = xml["TEI"]["teiHeader"]["profileDesc"]["textClass"]["keywords"]["term"]
+    if isinstance(subject, str):
+        return subject
     result = recurse(subject)
     assert len(result) > 0
     return " ".join(result)
+    # return " ".join([x for x in result if x not in {"literature", "classical", "prose"}])
 
 
 def recurse(data):
     result = []
-    if all([isinstance(x, str) for x in data]):
+    if isinstance(data, list) and all([isinstance(x, str) for x in data]):
         return data
     for x in data:
         if isinstance(x, dict):
@@ -73,6 +76,7 @@ def main():
         data["content"] = get_content(xml)
         data["name"] = get_name(xml)
         data["subject"] = get_subject(xml)
+        print(id_, data["subject"])
         data["date"] = get_date(xml)
         data["image_url"] = get_image_url(xml)
         data["material"] = get_material(xml)
