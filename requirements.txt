@@ -1,1 +1,15 @@
-Flask
+autopep8==1.6.0
+certifi==2020.6.20
+click==8.0.3
+colorama==0.4.4
+dominate==2.6.0
+Flask==2.0.2
+itsdangerous==2.0.1
+Jinja2==3.0.3
+MarkupSafe==2.0.1
+mysql-connector-python==8.0.28
+protobuf==3.19.4
+pycodestyle==2.8.0
+toml==0.10.2
+visitor==0.1.3
+Werkzeug==2.0.3
