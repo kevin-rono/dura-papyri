@@ -1,4 +1,5 @@
 import json
+import os
 
 import pandas as pd
 
@@ -69,21 +70,20 @@ def get_origin(xml):
 
 def main():
     fields = []
-    with open("xmls.json") as f:
+    with open(os.path.join("raw", "xmls.json")) as f:
         xmls = json.load(f)
     for id_, xml in xmls.items():
         data = {"id": id_}
         data["content"] = get_content(xml)
         data["name"] = get_name(xml)
         data["subject"] = get_subject(xml)
-        print(id_, data["subject"])
         data["date"] = get_date(xml)
         data["image_url"] = get_image_url(xml)
         data["material"] = get_material(xml)
         data["origin"] = get_origin(xml)
         fields.append(data)
     df = pd.DataFrame(fields)
-    df.to_csv("data.csv")
+    df.to_csv(os.path.join("raw", "data.csv"))
 
 
 if __name__ == "__main__":
