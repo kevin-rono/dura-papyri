@@ -62,11 +62,11 @@ def parseCSV(filePath):
         print(i, row['id'], row['tm_id'], row['wikidata_id'], row['content'], row['name'], row['subject'], row['date'], row['image_url'], row['material'], row['origin'], row['language'], row['findspot'], row['time_of_excavation'], row['image'])
 
 
-@app.route("/map")
+@app.route("/map", methods=['GET', 'POST'])
 def map():
     return render_template('map.html')
 
-@app.route("/timeline")
+@app.route("/timeline", methods=['GET', 'POST'])
 def timeline():
     return render_template('timeline.html')
 
