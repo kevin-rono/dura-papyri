@@ -4,6 +4,9 @@ import os
 
 import pandas as pd
 import requests
+import xmltodict
+from bs4 import BeautifulSoup
+from tqdm.auto import tqdm
 
 
 def get_subject(xml):
@@ -54,17 +57,38 @@ def get_content(xml):
 
 
 def get_image_url(xml):
+    image_url = ""
     divs = xml["TEI"]["text"]["body"]["div"]
-    for d in divs:
-        if d["@type"] == "figure":
+    for div in divs:
+        if div["@type"] == "figure":
             try:
-                return d["p"]["figure"]["graphic"]["@url"]
+                image_url = div["p"]["figure"]["graphic"]["@url"]
             except:
-                return d["p"]["figure"][0]["graphic"]["@url"]
+                image_url = div["p"]["figure"][0]["graphic"]["@url"]
+    try:
+        _, suffix = image_url.split("&key=")
+        xml_url = f"https://papyri.info/apis/{suffix}/source"
+        response = requests.get(xml_url)
+        xml = xmltodict.parse(response.content)
+    except:
+        return image_url
+    for div in xml["TEI"]["text"]["body"]["div"]:
+        if isinstance(div, dict) and div["@type"] == "figure":
+            image_url = div["p"]["figure"]["graphic"]["@url"]
+            break
+    assert image_url
+    response = requests.get(image_url)
+    soup = BeautifulSoup(response.content, "html.parser")
+    try:
+        return soup.find("div", class_="showComplex").find("a").find("img")["src"]
+    except:
+        return image_url
 
 
 def get_image(image_url):
-    return base64.b64encode(requests.get(image_url).content)
+    if "imageserver" in image_url:
+        return base64.b64encode(requests.get(image_url).content)
+    return ""
 
 
 def get_material(xml):
@@ -83,7 +107,7 @@ def main():
     fields = []
     with open(os.path.join("raw", "xmls.json")) as f:
         xmls = json.load(f)
-    for id_, xml in xmls.items():
+    for id_, xml in tqdm(xmls.items()):
         data = {"id": id_}
         data["content"] = get_content(xml)
         data["name"] = get_name(xml)
