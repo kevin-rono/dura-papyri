@@ -1,0 +1,5 @@
+pandas
+requests
+langdetect
+googletrans==3.1.0a0
+sentence-transformers
