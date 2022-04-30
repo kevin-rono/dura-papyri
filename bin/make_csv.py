@@ -1,12 +1,15 @@
 import base64
 import json
 import os
+import sys
 
 import pandas as pd
 import requests
 import xmltodict
 from bs4 import BeautifulSoup
 from tqdm.auto import tqdm
+
+sys.path.append("..")
 
 
 def get_subject(xml):

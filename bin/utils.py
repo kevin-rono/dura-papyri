@@ -1,8 +1,7 @@
 import time
 
-from langdetect import detect
 from googletrans import Translator
-
+from langdetect import detect
 
 translator = None
 

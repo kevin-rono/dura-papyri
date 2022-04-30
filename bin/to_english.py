@@ -1,5 +1,9 @@
+import sys
+
 import pandas as pd
 from utils import to_english
+
+sys.path.append("..")
 
 
 def main():
