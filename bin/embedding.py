@@ -38,7 +38,7 @@ def tsne(embeddings):
     return (
         TSNE(n_components=2, learning_rate="auto", init="random")
         .fit_transform(embeddings)
-        .embedding_.tolist()
+        .tolist()
     )
 
 
@@ -46,7 +46,7 @@ def main():
     texts = make_texts()
     embeddings = encode_texts(texts)
     reduced_embeddings = tsne(embeddings)
-    with open("embeddings.json", "w") as f:
+    with open(os.path.join("raw", "embeddings.json"), "w") as f:
         f.write(json.dumps(reduced_embeddings))
 
 
