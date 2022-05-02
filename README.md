@@ -31,6 +31,27 @@ This repository contains the source code for the Dura Papyri project. This work 
    $ (venv) python app.py
    ```
 
+## Data Preparation
+
+An important component of this project involved collecting papyri metadata from disparate online sources and cleaning them in presentable format. This section details the process involved in data preparation and wrangling. 
+
+### Data
+
+All raw data files used to power the web application are located under [`raw`](raw). 
+
+- [`xmls.json`](raw/xmls.json) is a JSON file containing all raw XMLs web scraped from [papyri.info](https://papyri.info). 
+- [`data.csv`](raw/data.csv) is a CSV file containing metadata for each papyrus item, obtained by parsing and extensively cleaning [`xmls.json`](raw/xmls.json).
+- [`embeddings.json`](raw/embeddings.json) is a JSON file containing two-dimensional vector representations of each papyrus item, obtained by using a pretrained language model and applying t-SNE dimensionality reduction on the resulting context vectors.
+
+### Executables
+
+All executable scripts are located under [`bin`](bin). To execute these scripts locally, `pip` install the dependencies listed in [`bin/requirements.txt`](bin/requirements.txt).
+
+- [`xml_scraper.ipynb`](bin/xml_scraper.ipynb) is a jupyter notebook used to scrape XML files to produce [`xmls.json`](raw/xmls.json) from [papyri.info](https://papyri.info), using [Trismegistos](https://www.trismegistos.org) as the gateway portal.
+- [`make_csv.py`](bin/make_csv.py) is a Python script used to parse [`xmls.json`](raw/xmls.json) into [`data.csv`](raw/data.csv). Note that some manual parsing of the dates was performed to further clean the field.
+- [`to_english.py`](bin/to_english.py) is a Python script used to further clean [`data.csv`](raw/data.csv) by removing any occurrences of non-English texts.
+- [`embed.py`](bin/embed.py) is a Python script that processes each entry of [`data.csv`](raw/data.csv) to produce two-dimensional vector representations of each metadata, available in [`embeddings.json`](raw/embeddings.json).
+
 ## License
 
-Release under the [MIT License](LICENSE).
+Released under the [MIT License](LICENSE).
