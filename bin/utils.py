@@ -1,4 +1,5 @@
 import time
+import logging
 
 from googletrans import Translator
 from langdetect import detect
@@ -25,8 +26,11 @@ def parse_date(date):
 
 
 def to_english(text):
-    if detect(text) == "en":
-        return text
+    try:
+        if detect(text) == "en":
+            return text
+    except:
+        pass
     global translator
     if translator is None:
         translator = Translator()
