@@ -1,4 +1,4 @@
 DB_HOST = 'localhost'
 DB_DATABASE = 'Dura'
 DB_USER = 'root'
-DB_PASSWORD = '*******'  # CHANGE TO YOUR PASSWORD
+DB_PASSWORD = 'Keiyo205!'  # CHANGE TO YOUR PASSWORD

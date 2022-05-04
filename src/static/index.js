@@ -1,6 +1,4 @@
-// Graph code from https://www.thecodehubs.com/read-uploaded-csv-file-in-javascript/
-
-var csvParsedArray = [];
+// Upload file
 $(document).on("click", "#btnUploadFile", function () {
   if ($("#fileToUpload").get(0).files.length == 0) {
     alert("Please upload the file first.");
@@ -12,70 +10,17 @@ $(document).on("click", "#btnUploadFile", function () {
     alert("Please upload only CSV files");
     return;
   }
-  let reader = new FileReader();
-  let bytes = 50000;
-  reader.onloadend = function (evt) {
-    let lines = evt.target.result;
-    if (lines && lines.length > 0) {
-      let line_array = CSVToArray(lines);
-      if (lines.length == bytes) {
-        line_array = line_array.splice(0, line_array.length - 1);
-      }
-      var columnArray = [];
-      var stringHeader = "<thead><tr>";
-      var stringBody = "<tbody>";
-      for (let i = 0; i < line_array.length; i++) {
-        let cellArr = line_array[i];
-        stringBody += "<tr>";
-        for (var j = 0; j < cellArr.length; j++) {
-          if (i == 0) {
-            columnArray.push(cellArr[j].replace("ï»¿", ""));
-            stringHeader += "<th>" + columnArray[j] + "</th>";
-          } else {
-            stringBody += "<td>" + cellArr[j] + "</td>";
-            csvParsedArray.push({
-              column: columnArray[j],
-              value: cellArr[j],
-            });
-          }
-        }
-        stringBody += "</tr>";
-      }
-      stringBody += "</tbody>";
-      stringHeader += "</tr></thead>";
-      $(".csv-table table").append(stringHeader);
-      $(".csv-table table").append(stringBody);
-    }
-  };
-  let blob = files[0].slice(0, bytes);
-  reader.readAsBinaryString(blob);
+
+  data = files[0];
+  console.log(data);
+
+  let form = new FormData();
+  form.append("data", data);
+
+  fetch("/upload", {
+    method: "POST",
+    body: form,
+  }).then((response) => {
+    console.log("File upload response: ", response);
+  });
 });
-function CSVToArray(strData, strDelimiter) {
-  strDelimiter = strDelimiter || ",";
-  let objPattern = new RegExp(
-    "(\\" +
-      strDelimiter +
-      "|\\r?\\n|\\r|^)" +
-      '(?:"([^"]*(?:""[^"]*)*)"|' +
-      '([^"\\' +
-      strDelimiter +
-      "\\r\\n]*))",
-    "gi"
-  );
-  let arrData = [[]];
-  let arrMatches = null;
-  while ((arrMatches = objPattern.exec(strData))) {
-    let strMatchedDelimiter = arrMatches[1];
-    let strMatchedValue = [];
-    if (strMatchedDelimiter.length && strMatchedDelimiter != strDelimiter) {
-      arrData.push([]);
-    }
-    if (arrMatches[2]) {
-      strMatchedValue = arrMatches[2].replace(new RegExp('""', "g"), '"');
-    } else {
-      strMatchedValue = arrMatches[3];
-    }
-    arrData[arrData.length - 1].push(strMatchedValue);
-  }
-  return arrData;
-}
