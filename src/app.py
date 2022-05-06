@@ -14,8 +14,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 # Upload folder
-# Use path in your local machine to find /raw directory
-UPLOAD_FOLDER = '/Users/kevinrono/Yale Drive/Classes/Senior year/Spring 2022/CS 276/dura-papyri/raw'
+UPLOAD_FOLDER = '/Users/kevinrono/Yale Drive/Classes/Senior year/Spring 2022/CS 276/dura-papyri/raw' # Use path in your local machine to find /raw directory
 app.config['UPLOAD_FOLDER'] =  UPLOAD_FOLDER
 
 db = mysql.connector.connect(
@@ -49,23 +48,19 @@ def uploadFiles():
 
 
 def parseCSV(filePath):
-    col_names = ['ID', 'Publication', 'Relation', 'Language', 'Date', 'Provenance', 'Findspot', 'Season', 'Wikidata_ID', 'content', 'name', 'subject', 'start', 'end', 'image_url', 'image', 'material', 'origin']
 
     # Use Pandas to parse the CSV file
     csvData = pd.read_csv(filePath, header=0)
 
     # Loop through the Rows
-    for i, row in csvData.iterrows():
+    for i, row in csvData.fillna("---").iterrows():
         sql = "INSERT INTO information (ID, Publication, Relation, Language, Date, Provenance, Findspot, Season, Wikidata_ID, content, name, subject, start, end, image_url, image, material, origin) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        values = (int(row['ID']), row['Publication'], row['Relation'], row['Language'], row['Date'], row['Provenance'], row['Findspot'], row['Season'], row['Wikidata_ID'], row['content'], row['name'], row['subject'], int(row['start']), int(row['end']), row['image_url'], row['image'], row['material'], row['origin'])
+        values = (row['ID'], row['Publication'], row['Relation'], row['Language'], row['Date'], row['Provenance'], row['Findspot'], row['Season'], row['Wikidata_ID'], row['content'], row['name'], row['subject'], row['start'], row['end'], row['image_url'], row['image'], row['material'], row['origin'])
 
         cursor.execute(sql, values) # , if_exists='append'
         db.commit()
-
-        #if i == 1:
-        print(i, row['ID'], row['Publication'], row['Relation'], row['Language'], row['Date'], row['Provenance'], row['Findspot'], row['Season'], row['Wikidata_ID'], row['content'], row['name'], row['subject'], row['start'], row['end'], row['image_url'], row['origin']) # row['image'], 
-        # print(i, row['ID'])
-        print()
+        
+        print("Values inserted!")
 
 
 @app.route("/map", methods=['GET', 'POST'])
