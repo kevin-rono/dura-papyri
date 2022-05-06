@@ -9,6 +9,27 @@
   <body>
     <h3>Timeline</h3>
 
+    <label for="start">Start year:</label>
+    <input type="number" id="start" min="-500" max="500" step="1" value="0" />
+
+    <br /><br />
+
+    <label for="end">End year:</label>
+    <input type="number" id="end" min="-500" max="500" step="1" value="0" />
+
+    <br /><br />
+
+    <button
+      type="button"
+      class="btn btn-info btn-lg"
+      id="timelineDisplay"
+      onclick="showTimeline()"
+    >
+      Show Timeline!
+    </button>
+
+    <br /><br /><br />
+
     <div class="timeline">
       <div class="container left">
         <div class="content">
