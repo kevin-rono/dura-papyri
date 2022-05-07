@@ -10,8 +10,9 @@ h2 {
 
 /* Set a background color */
 body {
-  background-color: #becded;
+  background-color: #F5F5F5;
   font-family: Helvetica, sans-serif;
+  margin: 0px;
 }
 
 /* The actual timeline (the vertical ruler) */

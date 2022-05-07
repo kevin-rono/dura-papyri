@@ -4,34 +4,53 @@
     <title>Papyri Finder</title>
 
     <link rel="stylesheet" href="../static/timeline.css" />
+    <link rel="stylesheet" href="../static/styles.css" />
   </head>
 
   <body>
-    <h3>Timeline</h3>
+    <div class = 'titlebar'><h2>Timeline</h2></center></div>
 
-    <h4>Enter start year and end year to display papyri of those years!</h4>
-    <p>note: negative numbers connotate BCE (i.e. 50 BCE should be represented as -50)</p>
+    <div class = 'date_form'>
 
-    <label for="start">Start year:</label>
-    <input type="number" id="start" min="-500" max="500" step="1" value="0" />
+      <h4>Enter start year and end year to display papyri of those years!</h4>
+      <p>note: negative numbers connotate BCE (i.e. 50 BCE should be represented as -50)</p>
 
-    <br /><br />
 
-    <label for="end">End year:</label>
-    <input type="number" id="end" min="-500" max="500" step="1" value="0" />
+    <table>
+      <tr>
+        <td>
+          <label for="start">Start year:</label>
+        </td>
+        <td class = 'enter_year'>
+          <input type="number" id="start" min="-500" max="500" step="1" value="0" />
+        </td>
 
+
+        <tr>
+          <td>
+            <label for="end">End year:</label>
+          </td>
+          <td class = 'enter_year'>
+            <input type="number" id="end" min="-500" max="500" step="1" value="0" />
+          </td>
+        </tr>
+    </table>
     <br /><br />
 
     <button
       type="button"
-      class="btn btn-info btn-lg"
+      class="btn btn-info btn-lg dates_button"
       id="timelineDisplay"
       onclick="showTimeline()"
     >
       Show Timeline!
     </button>
 
+  </div>
+
     <br /><br /><br />
+
+
 
     <div class="timeline">
       <div class="container left">
@@ -63,9 +82,11 @@
       </div>
     </div> -->
 
-    <button id="timelineReturn" type="button" onclick="history.back()">
-      Return to Home
-    </button>
+    <center>
+      <button id="timelineReturn" class = 'home_button' type="button" onclick="history.back()">
+      &larr; &nbsp Return to Home
+      </button>
+    </center>
   </body>
   <script
     src="https://code.jquery.com/jquery-3.6.0.slim.js"

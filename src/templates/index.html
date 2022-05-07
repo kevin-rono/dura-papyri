@@ -5,37 +5,72 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../static/index.css" />
-
+<link rel="stylesheet" href="../static/styles.css" />
     <title>Papyri Finder</title>
   </head>
 
   <body>
-    <h2>Explore the World of Papyri of Dura-Europos!</h2>
-
-    <div class="container" style="margin-top: 30px">
-      <div class="col-md-4">
-        <input type="file" id="fileToUpload" class="form-control" />
-      </div>
-      <div class="col-md-4">
-        <button type="button" class="btn btn-info btn-lg" id="btnUploadFile">
-          Upload File
-        </button>
-      </div>
+    <div class = 'titlebar'>
+      <center>
+      <h2>Explore the World of Papyri of Dura-Europos!</h2>
+    </center>
     </div>
 
-    <!-- <p id="text1"> Upload your text file here: </p>
-        <p> <input type="file"  accept="text/plain" name="file" id="myFile" ></p> -->
+    <div class = 'introduction'>
 
-    <div class="collapse navbar-collapse" id="navbar">
-      <ul class="navbar-nav mr-auto mt-2">
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('map') }}"> Map </a>
-        </li>
+      <h3>About</h3>
+      <p>
+        Located in modern Syria, Dura-Europos is an exceptional site within Mediterranean archaeology, perhaps most notably for the partial survival of organic materials. With few exceptions, organic material from the ancient Mediterranean is preserved consistently only in Egypt, granting Dura-Europos a privileged position in testing the broader applicability of Egyptian evidence. This unique status of Dura-Europos is further heightened by its relatively undisturbed state of preservation, its abrupt and finite end, and the comparatively sophisticated archaeology employed at the site during its initial stage of excavation in comparison to other Egyptian sites that were often hastily stripped bare in search for Pharaonic materials and papyri. This project, centered around Dura-Europos’ invaluable corpus of texts written on organic media, i.e., papyri and parchment, is guided by the unusual possibility of combining digital humanistic approaches with a relatively detailed archaeological record in the study of these texts. We seek to create new digital tools that enable new perspectives on this corpus and might be of interest to a broad array of audiences.
+      </p>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('timeline') }}">Timeline</a>
-        </li>
-      </ul>
+      <h3>How to use the tool:</h3>
+
+        If you are reading this, that means you have downloaded the full repository containing the application. With it should be a file
+        in the 'raw' folder named 'data.csv.' Use the upload tool below to load in this file; this should populate the database will nearly
+        200 Dura Papyri. From there, feel free to explore! Currently, we have two main tools for exploration: a map tool, and a timeline.
+        The map tool will allow you to view artifacts by find spot, while the timeline will allow you to filter by date of the artifact (use, not
+        discovery).
+
+
+    </div>
+
+
+    <center><h2> Tools </h2></center>
+    <div class = 'tools_box'>
+
+      <div class = 'half_screen'>
+        <h3>Upload the Data</h3>
+        <p> Locate 'dura-papyri/raw/data.csv' and upload it below to populate the
+          mysql database </p>
+        <div class="container" style="margin-top: 30px">
+          <div class="col-md-4">
+            <input type="file" id="fileToUpload" class="form-control" />
+            <label class= 'file_uploader' for = 'fileToUpload'> Select File </label>
+          </div>
+          <div class="col-md-4">
+            <button type="button" class="upload_button btn btn-info btn-lg" id="btnUploadFile">
+              Upload File
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- <p id="text1"> Upload your text file here: </p>
+          <p> <input type="file"  accept="text/plain" name="file" id="myFile" ></p> -->
+
+      <div class = 'half_screen'>
+        <h3>Explore the Tools!</h3>
+        <div class="collapse navbar-collapse" id="navbar">
+
+
+              <a class="nav-link tool_button" href="{{ url_for('map') }}"> Map </a>
+
+
+              <a class="nav-link tool_button" href="{{ url_for('timeline') }}">Timeline</a>
+
+
+        </div>
+      </div>
+
     </div>
 
     <div class="table-responsive col-md-12 csv-table" style="margin-top: 20px">
