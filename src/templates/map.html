@@ -19,9 +19,21 @@
     />
 
     <map name="imagemap">
-      <area shape="rect" coords="0,0,82,126" href="sun.htm" alt="Sun">
-      <area shape="circle" coords="90,58,3" href="mercur.htm" alt="Mercury">
-      <area shape="circle" coords="124,58,8" href="venus.htm" alt="Venus">
+      <!-- top clickable area  -->
+      <area shape="rect" coords="15, 88, 35, 105" href="{{ url_for('results') }}" alt="blue" target="_blank">
+      <area shape="rect" coords="48, 87, 57, 95" href="{{ url_for('results') }}" alt="lightGreen" target="_blank">
+      <area shape="rect" coords="62, 75, 89, 85" href="{{ url_for('results') }}" alt="maroon" target="_blank">
+      <area shape="rect" coords="66, 94, 100, 116" href="{{ url_for('results') }}" alt="green" target="_blank">
+
+      <!-- bottom clickable area  -->
+      <area shape="rect" coords="60, 248, 72, 255" href="{{ url_for('results') }}" alt="pink" target="_blank">
+      <area shape="poly" coords="66, 258, 73, 257, 83, 279, 77, 280" href="{{ url_for('results') }}" alt="purple" target="_blank">
+      <area shape="poly" coords="80, 285, 85, 282, 98, 309, 94, 311" href="{{ url_for('results') }}" alt="yellow" target="_blank">
+      <area shape="poly" coords="76, 256, 80, 251, 104, 306, 100, 308" href="{{ url_for('results') }}" alt="orange" target="_blank">
+      <area shape="poly" coords="88, 316, 98, 311, 100, 315, 90, 320" href="{{ url_for('results') }}" alt="red" target="_blank">
+      <area shape="poly" coords="91, 323, 102, 318, 105, 323, 93, 328" href="{{ url_for('results') }}" alt="navy" target="_blank">
+      <area shape="poly" coords="100, 313, 106, 308, 110, 317, 105, 321" href="{{ url_for('results') }}" alt="cyan" target="_blank">
+
     </map>
 
     <br />
