@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 # Upload folder
-UPLOAD_FOLDER = '/Users/alinakramp/Desktop/yale/Digital Humanities/dura-papyri/raw' # Use path in your local machine to find /raw directory
+UPLOAD_FOLDER = '/Users/kevinrono/Yale Drive/Classes/Senior year/Spring 2022/CS 276/dura-papyri/raw' # Use path in your local machine to find /raw directory
 app.config['UPLOAD_FOLDER'] =  UPLOAD_FOLDER
 
 db = mysql.connector.connect(
@@ -94,7 +94,14 @@ def display_results():
         print(location_string)
 
     query = "SELECT * FROM information WHERE Findspot REGEXP %s"
+
     val = (location_string, )
+
+    if (location_string == 'Tower 2'):
+        query = "SELECT * FROM information WHERE Findspot REGEXP %s and Findspot NOT REGEXP %s"
+        val = (location_string, 'Tower 22')
+
+    
 
     cursor.execute(query, val)
     result = cursor.fetchall()
