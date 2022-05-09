@@ -29,7 +29,8 @@ else {
 
 // end date
 let endDiv = $("<div>").addClass("container right").addClass("content");
-$("#contentRight").append(endDiv);
+$("#contentLeft").append(endDiv);
+
 
 if (end < 0) {
   $( ".content" ).append("<h2>" + Math.abs(end) + " BCE </h2>").append("<p>" + end + "</p>");

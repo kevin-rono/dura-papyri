@@ -16,5 +16,10 @@ const locations = {
 
 $("#image").click(function (e) {
 
-  alert("No papyri found in this area of Dura-Europos; click a colored area to explore!");
+  var x = e.pageX - this.offsetLeft;
+  var y = e.pageY - this.offsetTop;
+  
+  alert(x + ", " + y);
+
+  // alert("No papyri found in this area of Dura-Europos; click a colored area to explore!");
 });
