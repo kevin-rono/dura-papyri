@@ -15,11 +15,10 @@ const locations = {
 };
 
 $("#image").click(function (e) {
-
-  alert("No papyri found in this area of Dura-Europos; click a colored area to explore!");
-
+  alert(
+    "No papyri found in this area of Dura-Europos; click a colored area to explore!"
+  );
 });
-
 
 // for each id in map
 // create fetch, passing the the value of the id in locations
@@ -28,21 +27,19 @@ $("#image").click(function (e) {
 // attach data to results.html
 
 function populateResults(id) {
-
   // let test = $("<div>").html("test");
   // $("#test").append(test);
 
   $("#test").html("test");
 
-
   console.log(id);
 
-  fetch("/display_results", { 
-    method: "GET" 
-  }).then(response => response.json()).then(data => { 
-    data = locations[id];
-    console.log(data);
-});
-
+  fetch("/display_results", {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      data = locations[id];
+      console.log(data);
+    });
 }
-

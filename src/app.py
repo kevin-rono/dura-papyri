@@ -84,7 +84,12 @@ def results():
 
 @app.route("/display_results",  methods=['GET'])
 def display_results():
-    result = None
+    location = request.form.get("location")
+    location_string = '|'.join(location)
+
+    query = "SELECT * FROM information WHERE Findspot REGEXP location_string ORDER BY Publication ASC"
+    cursor.execute(query)
+    result = cursor.fetchall()
 
     return json.dumps({"success": True, "data": result}, default = object_converter), 200, {"ContentType": "application/json"}
 
