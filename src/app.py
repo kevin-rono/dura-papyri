@@ -84,6 +84,7 @@ def results():
 
 @app.route("/display_results",  methods=['GET'])
 def display_results():
+
     result = None
 
     return json.dumps({"success": True, "data": result}, default = object_converter), 200, {"ContentType": "application/json"}
