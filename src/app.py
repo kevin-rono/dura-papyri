@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 # Upload folder
-UPLOAD_FOLDER = '/Users/alinakramp/Desktop/yale/Digital Humanities/dura-papyri/raw' # Use path in your local machine to find /raw directory
+UPLOAD_FOLDER = '/Users/kevinrono/Yale Drive/Classes/Senior year/Spring 2022/CS 276/dura-papyri/raw' # Use path in your local machine to find /raw directory
 app.config['UPLOAD_FOLDER'] =  UPLOAD_FOLDER
 
 db = mysql.connector.connect(
@@ -94,7 +94,7 @@ def show_timeline():
     start = request.form.get("start")
     end = request.form.get("end")
 
-    query = "SELECT * FROM information WHERE start >= %s AND end <= %s ORDER BY start ASC" #  ORDER BY start ASC
+    query = "SELECT * FROM information WHERE start >= %s AND end <= %s ORDER BY start ASC, Publication ASC" #  ORDER BY start ASC
     vals = (start, end)
 
     cursor.execute(query, vals)
