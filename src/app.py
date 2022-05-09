@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 # Upload folder
-UPLOAD_FOLDER = '/Users/kevinrono/Yale Drive/Classes/Senior year/Spring 2022/CS 276/dura-papyri/raw' # Use path in your local machine to find /raw directory
+UPLOAD_FOLDER = '/Users/alinakramp/Desktop/yale/Digital Humanities/dura-papyri/raw' # Use path in your local machine to find /raw directory
 app.config['UPLOAD_FOLDER'] =  UPLOAD_FOLDER
 
 db = mysql.connector.connect(
@@ -104,6 +104,18 @@ def display_results():
     
 
     cursor.execute(query, val)
+    result = cursor.fetchall()
+
+    return json.dumps({"success": True, "data": result}, default = object_converter), 200, {"ContentType": "application/json"}
+
+@app.route("/display_timeline_results",  methods=['POST'])
+def display_timeline_results():
+
+    ID = [request.form.get("ID")]
+    print(ID)
+    query = "SELECT * FROM information WHERE ID = %s"
+
+    cursor.execute(query, ID)
     result = cursor.fetchall()
 
     return json.dumps({"success": True, "data": result}, default = object_converter), 200, {"ContentType": "application/json"}

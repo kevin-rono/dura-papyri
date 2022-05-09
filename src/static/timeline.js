@@ -27,6 +27,7 @@ function showTimeline() {
 
         for (let i = 0; i < data.length; i++) {
           papyrus = data[i];
+          id = papyrus["ID"];
           publication = papyrus["Publication"];
           start_date = papyrus["start"];
           end_date = papyrus["end"];
@@ -35,7 +36,13 @@ function showTimeline() {
             // left
             let leftDiv = $(`<div id=papyrus${i}>`)
               .addClass("container left")
-              .addClass("content");
+              .addClass("content")
+              .on("click", function() {
+                localStorage.setItem("ID", id);
+                console.log(id);
+                window.open("../results", '_blank').focus();
+
+              } );
 
             $(".timeline").append(leftDiv);
 
@@ -72,7 +79,13 @@ function showTimeline() {
             // right
             let rightDiv = $(`<div id=papyrus${i}>`)
               .addClass("container right")
-              .addClass("content");
+              .addClass("content")
+              .on("click", function() {
+                localStorage.setItem("ID", id);
+                console.log(id);
+                window.open("../results", '_blank').focus();
+
+              } );
 
             $(".timeline").append(rightDiv);
 

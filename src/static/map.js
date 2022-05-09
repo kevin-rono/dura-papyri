@@ -6,5 +6,6 @@ $("#image").click(function (e) {
 
 function storeLocation(location) {
   localStorage.setItem("location", location);
+  localStorage.setItem("map", "yes");
   console.log(localStorage.getItem("location"));
 }
