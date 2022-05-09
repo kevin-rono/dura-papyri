@@ -5,6 +5,7 @@ from os.path import join, dirname, realpath
 import pandas as pd
 import json
 import datetime
+import base64
 
 from flask import Flask, render_template, request, send_file, redirect, url_for
 
@@ -88,16 +89,18 @@ def display_results():
     return json.dumps({"success": True, "data": result}, default = object_converter), 200, {"ContentType": "application/json"}
 
 
-@app.route("/show_timeline",  methods=['GET'])
+@app.route("/show_timeline",  methods=['POST'])
 def show_timeline():
     start = request.form.get("start")
     end = request.form.get("end")
 
-    query = "SELECT * FROM information WHERE start >= %s AND end <= %s"
+    query = "SELECT * FROM information WHERE start >= %s AND end <= %s ORDER BY start ASC" #  ORDER BY start ASC
     vals = (start, end)
 
     cursor.execute(query, vals)
     result = cursor.fetchall()
+
+    # result[0]["image"] = base64.b64decode(result[0]["image"])
         
     return json.dumps({"success": True, "data": result}, default = object_converter), 200, {"ContentType": "application/json"}
 
