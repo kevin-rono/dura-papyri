@@ -82,13 +82,21 @@ def timeline():
 def results():
     return render_template('results.html')
 
-@app.route("/display_results",  methods=['GET'])
+@app.route("/display_results",  methods=['POST'])
 def display_results():
     location = request.form.get("location")
-    location_string = '|'.join(location)
 
-    query = "SELECT * FROM information WHERE Findspot REGEXP location_string ORDER BY Publication ASC"
-    cursor.execute(query)
+    if (isinstance(location, list)):
+        location_string = '|'.join(location)
+        print(location_string)    
+    else:
+        location_string = location
+        print(location_string)
+
+    query = "SELECT * FROM information WHERE Findspot REGEXP %s"
+    val = (location_string, )
+
+    cursor.execute(query, val)
     result = cursor.fetchall()
 
     return json.dumps({"success": True, "data": result}, default = object_converter), 200, {"ContentType": "application/json"}
