@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 # Upload folder
-UPLOAD_FOLDER = '/Users/alinakramp/Desktop/yale/Digital\ Humanities/dura-papyri/raw' # Use path in your local machine to find /raw directory
+UPLOAD_FOLDER = '/Users/alinakramp/Desktop/yale/Digital Humanities/dura-papyri/raw' # Use path in your local machine to find /raw directory
 app.config['UPLOAD_FOLDER'] =  UPLOAD_FOLDER
 
 db = mysql.connector.connect(
