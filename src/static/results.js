@@ -22,6 +22,18 @@ window.onload = function() {
     let location = localStorage.getItem('location');
     console.log(location);
 
+    let table = document.getElementById("resultsTable");
+    table.insertRow(-1);
+    for (i = 0; i < 16; i++) {
+        let cell1 = row.insertCell(0);
+        cell1.innerHTML = "hello";
+    }
+    
+
+    // $('#tbody').append("<tr>").addClass("align-middle").html("hello");
+
+
+
     // fetch locations
     let form = new FormData();
     form.append("location", locations[location]);
@@ -33,6 +45,15 @@ window.onload = function() {
     .then(response => response.json())
     .then(data => { 
       data = data.data;
+
+    //   for (let i = 0; i < data.length; i++) {
+    //       let entry = data[i];
+    //       for (value in entry) {
+    //         $('#tbody').append(<tr>);
+    //       }
+    //   }
+
+
   });
   
   }
