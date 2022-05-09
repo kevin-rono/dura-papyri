@@ -19,16 +19,6 @@ window.onload = function () {
   let location = localStorage.getItem("location");
   console.log(location);
 
-    // let table = document.getElementById("resultsTable");
-    // let row = table.insertRow(-1);
-    // for (i = 0; i < 16; i++) {
-    //     let cell1 = row.insertCell(0);
-    //     cell1.innerHTML = "hello";
-    // }
-    
-
-    // $('#tbody').append("<tr>").addClass("align-middle").html("hello");
-
     // fetch locations
     let form = new FormData();
     form.append("location", locations[location]);
@@ -64,7 +54,7 @@ window.onload = function () {
           let material = entry["material"];
           let origin = entry["origin"];
 
-
+          // add values into graph 
           let table = document.getElementById("resultsTable");
           let row = table.insertRow(-1);
 
@@ -116,9 +106,7 @@ window.onload = function () {
           let cell_origin = row.insertCell(-1);
           cell_origin.innerHTML = origin;
 
-
       }
-
 
   });
   
