@@ -3,6 +3,8 @@ import mysql.connector
 import os
 from os.path import join, dirname, realpath
 import pandas as pd
+import json
+import datetime
 
 from flask import Flask, render_template, request, send_file, redirect, url_for
 
@@ -14,7 +16,7 @@ app = Flask(__name__)
 app.config["DEBUG"] = True
 
 # Upload folder
-UPLOAD_FOLDER = '/Users/alinakramp/Desktop/yale/Digital\ Humanities/dura-papyri/raw' # Use path in your local machine to find /raw directory
+UPLOAD_FOLDER = '/Users/kevinrono/Yale Drive/Classes/Senior year/Spring 2022/CS 276/dura-papyri/raw' # Use path in your local machine to find /raw directory
 app.config['UPLOAD_FOLDER'] =  UPLOAD_FOLDER
 
 db = mysql.connector.connect(
@@ -24,6 +26,10 @@ db = mysql.connector.connect(
     database = secretkeys.DB_DATABASE
     )
 cursor = db.cursor(dictionary = True)
+
+def object_converter(o):
+    if isinstance(o, datetime.datetime):
+        return o.__str__()
 
 @app.route("/")
 def index():
@@ -74,6 +80,25 @@ def timeline():
 @app.route("/results")
 def results():
     return render_template('results.html')
+
+@app.route("/display_results",  methods=['GET'])
+def display_results():
+
+    return json.dumps({"success": True, "data": result}, default = object_converter), 200, {"ContentType": "application/json"}
+
+
+@app.route("/show_timeline",  methods=['GET'])
+def show_timeline():
+    start = request.form.get("start")
+    end = request.form.get("end")
+
+    query = "SELECT * FROM information WHERE start >= %s AND end <= %s"
+    vals = (start, end)
+
+    cursor.execute(query, vals)
+    result = cursor.fetchall()
+        
+    return json.dumps({"success": True, "data": result}, default = object_converter), 200, {"ContentType": "application/json"}
 
 
 if __name__ == '__main__':
