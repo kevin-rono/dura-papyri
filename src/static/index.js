@@ -11,6 +11,8 @@ $(document).on("click", "#btnUploadFile", function () {
     return;
   }
 
+  alert("Document uploaded successfully");
+
   data = files[0];
   console.log(data);
 
