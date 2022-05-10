@@ -25,11 +25,21 @@ This repository contains the source code for the Dura Papyri project. This work 
    $ (venv) mysql -h localhost -u root -p < init.sql
    ```
 
-4. Execute the main script to run the web application.
+   
+4. Update path to raw in app.py and change password in secretkeys.py to your own MySQL password. Both files are found in src.
+   
+   ```
+   UPLOAD_FOLDER = '/../dura-papyri/raw
+
+   DB_PASSWORD = ''  # CHANGE TO YOUR PASSWORD
+   ```
+   
+5. Execute the main script to run the web application. You should now be able to open the page on localhost:5000
 
    ```
    $ (venv) python app.py
    ```
+   
 
 ## Data Preparation
 
